@@ -1,9 +1,11 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 const Home = () => {
+   
     return (
         <div>
-            this is home page 
+             
         </div>
     );
 };

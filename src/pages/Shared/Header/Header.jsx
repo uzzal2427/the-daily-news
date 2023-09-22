@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../../assets/logo.png'
 import moment from 'moment';
 import { Button, Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import Marquee from "react-fast-marquee";
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaUserAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const Header = () => {
+    const { user } = useContext(AuthContext)
     return (
         <Container>
             <div className="text-center">
@@ -25,15 +28,17 @@ const Header = () => {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mx-auto">
-                                <Nav.Link href="#features">Home</Nav.Link>
-                                <Nav.Link href="#pricing">About</Nav.Link>
-                                <Nav.Link href="#pricing">Career</Nav.Link>
+                                <Link className='pe-2' to='/'>Home</Link>
+                                <Link className='pe-2' href="#">About</Link>
+                                <Link href="#">Career</Link>
                             </Nav>
                             <Nav>
-                                <Nav.Link href="#deets"> <FaUserCircle /> </Nav.Link>
-                                <Nav.Link eventKey={2} href="#memes">
-                                    <Button variant="dark">Login</Button>
+                                <Nav.Link href="#deets">
+                                    {user ? <span>{user.displayName}</span> : <FaUserAlt style={{ fontSize: '24px' }}></FaUserAlt>}
                                 </Nav.Link>
+
+                                <Link to='/login'>  <Button variant="dark">Login</Button></Link>
+
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
